@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BAAK BOUW — Bouw & Renovatie</title>
+  <meta name="description" content="BAAK BOUW — Vakwerk in renovatie, aanbouw en onderhoud. Snel, strak, en betrouwbaar." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand:#0ea5e9;/* Sky-500 */
+      --brand-2:#22d3ee;/* Cyan-400 */
+      --ink:#0b1220;
+      --muted:#667085;
+      --paper:#0a0f1a;
+      --card:#0e1626;
+      --card-2:#101a2d;
+      --ring:rgba(34,211,238,.5);
+      --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#e6edf7;background:linear-gradient(180deg,#081021 0%,#0a1224 100%);}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;height:auto;display:block}
+    /* Layout helpers */
+    .container{width:min(1200px,100%);margin-inline:auto;padding:0 18px}
+    .grid{display:grid;gap:20px}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.1rem;border-radius:14px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#061018;font-weight:700;box-shadow:0 10px 30px rgba(14,165,233,.35);border:none;cursor:pointer}
+    .btn.ghost{background:transparent;color:#e6edf7;border:1px solid rgba(255,255,255,.15)}
+    .chip{font-size:.8rem;padding:.35rem .65rem;border-radius:999px;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25);color:#b7faff}
+    .card{background:linear-gradient(180deg,var(--card),var(--card-2));border:1px solid rgba(255,255,255,.06);border-radius:22px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+    .shadowGlow{box-shadow:0 0 0 1px rgba(34,211,238,.12),0 15px 60px rgba(14,165,233,.25)}
+    .glass{backdrop-filter: blur(10px); background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08)}
+    /* Header */
+    header{position:sticky;top:0;z-index:50;background:rgba(8,16,33,.7);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+    nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+    .logo{display:flex;align-items:center;gap:.7rem;font-weight:900;letter-spacing:.5px}
+    .logoMark{width:34px;height:34px;border-radius:10px;background:conic-gradient(from 180deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#00131b;font-weight:900}
+    .navlinks{display:flex;gap:18px}
+    .navlinks a{padding:.45rem .7rem;border-radius:10px;color:#cfe7ff}
+    .navlinks a:hover{background:rgba(255,255,255,.06)}
+    .hamb{display:none}
+    /* Hero */
+    .hero{position:relative;overflow:hidden}
+    .hero .bgfx{position:absolute;inset:-10%;background:radial-gradient(800px 400px at 20% -10%,rgba(14,165,233,.25),transparent 60%),radial-gradient(800px 400px at 100% 0,rgba(34,211,238,.15),transparent 60%)}
+    .heroInner{padding:80px 0;display:grid;gap:28px}
+    .headline{font-size: clamp(2rem, 4vw + .5rem, 3.2rem);line-height:1.05;font-weight:900;letter-spacing:-.02em}
+    .sub{color:#c3cddd;font-size:1.07rem}
+    .badges{display:flex;flex-wrap:wrap;gap:10px}
+    .heroCta{display:flex;gap:12px;flex-wrap:wrap}
+    .heroMedia{position:relative}
+    .phoneMock{aspect-ratio:10/6;border-radius:24px;border:1px solid rgba(255,255,255,.08);overflow:hidden}
+    .shine{position:absolute;inset:-20%;background:radial-gradient(600px 250px at 70% 10%,rgba(255,255,255,.15),transparent 60%)}
+    /* Sections */
+    section{padding:60px 0}
+    .sectionTitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+    .title{font-size:1.7rem;font-weight:900}
+    .kicker{color:var(--muted)}
+    /* Services */
+    .serviceGrid{grid-template-columns:repeat(12,1fr)}
+    .service{grid-column: span 12; padding:20px}
+    .service .icon{font-size:26px}
+    .service h3{margin:.4rem 0 .2rem}
+    .service p{color:#c8d2e1}
+    /* Portfolio */
+    .portfolio{grid-template-columns:repeat(12,1fr)}
+    .work{grid-column:span 12; position:relative; overflow:hidden; border-radius:18px; border:1px solid rgba(255,255,255,.06)}
+    .work img{width:100%; height: 240px; object-fit:cover; filter:saturate(1.1)}
+    .work .label{position:absolute;left:10px;bottom:10px}
+    /* Process */
+    .steps{grid-template-columns:repeat(12,1fr)}
+    .step{grid-column:span 12; padding:18px}
+    .step .num{width:34px;height:34px;border-radius:10px;background:rgba(34,211,238,.15);display:grid;place-items:center;font-weight:800;color:#9efcff;border:1px solid rgba(34,211,238,.35)}
+    /* Contact */
+    form{display:grid;gap:12px}
+    input, textarea{background:#0b1426;color:#e6edf7;border:1px solid rgba(255,255,255,.12);padding:12px 14px;border-radius:12px;outline:none}
+    input:focus, textarea:focus{border-color:var(--ring);box-shadow:0 0 0 4px rgba(34,211,238,.12)}
+    .footer{padding:30px 0;color:#aab7cc;border-top:1px solid rgba(255,255,255,.06)}
+    /* Responsive */
+    @media (min-width:720px){
+      .heroInner{grid-template-columns:1.1fr .9fr;align-items:center}
+      .service{grid-column:span 4}
+      .work{grid-column:span 4}
+      .step{grid-column:span 3}
+    }
+    /* Simple entrance animations */
+    [data-reveal]{opacity:0;transform:translateY(14px);transition:all .6s cubic-bezier(.2,.65,.2,1)}
+    [data-reveal].visible{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+  <!-- ================= SIMPLE CONFIG YOU CAN EDIT =================
+    How to edit:
+    1) Change text, phone, email, services, and project images below.
+    2) Replace YOUR_EMAIL_HERE in the contact form action.
+    3) Swap placeholder images with your own (use /images/ or absolute URLs).
+  ================================================================== -->
+  <script>
+    const SITE = {
+      name: "BAAK BOUW",
+      tagline: "Vakwerk in renovatie, aanbouw en onderhoud.",
+      phone: "+31 6 1234 5678",
+      email: "info@baakbouw.nl",
+      cta: "Vrijblijvende offerte",
+      address: "Regio Randstad",
+      services: [
+        { icon: "🧱", title: "Renovatie", text: "Totaalrenovaties van keuken tot badkamer met strakke afwerking." },
+        { icon: "🏗️", title: "Aanbouw & Dakkapel", text: "Meer ruimte en licht met aanbouw, opbouw of dakkapel." },
+        { icon: "🛠️", title: "Onderhoud", text: "Snel en netjes onderhoud voor huis en bedrijf." },
+        { icon: "🪵", title: "Timmerwerk", text: "Maatwerk kasten, kozijnen en trappen in eigen beheer." },
+        { icon: "🧼", title: "Stuc & Schilder", text: "Spiegelgladde muren en duurzaam schilderwerk." },
+        { icon: "⚡", title: "Installatie", text: "Elektra, loodgieterswerk en verduurzaming." }
+      ],
+      portfolio: [
+        { img: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop", label: "Badkamerrenovatie – Haarlem" },
+        { img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1600&auto=format&fit=crop", label: "Keuken – Amsterdam" },
+        { img: "https://images.unsplash.com/photo-1600607687920-4ce3439a2a88?q=80&w=1600&auto=format&fit=crop", label: "Aanbouw – Leiden" },
+        { img: "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1600&auto=format&fit=crop", label: "Dakkapel – Den Haag" },
+        { img: "https://images.unsplash.com/photo-1472220625704-91e1462799b2?q=80&w=1600&auto=format&fit=crop", label: "Timmerwerk – maatkast" },
+        { img: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1600&auto=format&fit=crop", label: "Woonkamer – stuc & schilder" }
+      ]
+    }
+  </script>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#top" class="logo" aria-label="BAAK BOUW home">
+          <span class="logoMark">BB</span>
+          <span>BAAK BOUW</span>
+        </a>
+        <button class="hamb" aria-label="Menu" onclick="document.querySelector('.navlinks').classList.toggle('open')">☰</button>
+        <div class="navlinks">
+          <a href="#services">Diensten</a>
+          <a href="#projecten">Projecten</a>
+          <a href="#proces">Werkwijze</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="bgfx"></div>
+      <div class="container heroInner">
+        <div>
+          <div class="badges" data-reveal><span class="chip">Sinds 2014 • Betrouwbaar vakmanschap</span></div>
+          <h1 class="headline" data-reveal>BAAK BOUW<br><span style="background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">Bouw & Renovatie</span> die indruk maakt</h1>
+          <p class="sub" data-reveal>Strakke afwerking, heldere afspraken en één vast aanspreekpunt. Van kleine verbouwing tot totaalproject.</p>
+          <div class="heroCta" data-reveal>
+            <a class="btn" href="#contact">\u260E\uFE0F  Bel / Offerte</a>
+            <a class="btn ghost" href="#projecten">Bekijk projecten</a>
+          </div>
+          <div class="badges" style="margin-top:14px" data-reveal>
+            <span class="chip">\u2B50\u2B50\u2B50\u2B50\u2B50  Klanttevredenheid</span>
+            <span class="chip">\u2705 Afspraak = Afspraak</span>
+            <span class="chip">\u23F1\uFE0F Snel en netjes</span>
+          </div>
+        </div>
+        <div class="heroMedia" data-reveal>
+          <div class="phoneMock card shadowGlow">
+            <img src="https://images.unsplash.com/photo-1505692794403-34d4982f88aa?q=80&w=1200&auto=format&fit=crop" alt="Renovatie voorbeeld"/>
+            <div class="shine"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+        <div class="sectionTitle">
+          <div>
+            <div class="kicker">Wat we doen</div>
+            <h2 class="title">Diensten</h2>
+          </div>
+          <a href="#contact" class="btn ghost">Vrijblijvend advies</a>
+        </div>
+        <div class="grid serviceGrid">
+          <!-- services injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="projecten">
+      <div class="container">
+        <div class="sectionTitle">
+          <div>
+            <div class="kicker">Trots op ons werk</div>
+            <h2 class="title">Projecten</h2>
+          </div>
+          <a href="#contact" class="btn">Plan een bezichtiging</a>
+        </div>
+        <div class="grid portfolio">
+          <!-- portfolio injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="proces">
+      <div class="container">
+        <div class="sectionTitle">
+          <div>
+            <div class="kicker">Zo werken wij</div>
+            <h2 class="title">Van idee tot oplevering</h2>
+          </div>
+        </div>
+        <div class="grid steps">
+          <div class="step card" data-reveal>
+            <div class="num">1</div>
+            <h3>Intake & Inmeten</h3>
+            <p>We luisteren, meten en denken mee. Je krijgt snel een duidelijke offerte.</p>
+          </div>
+          <div class="step card" data-reveal>
+            <div class="num">2</div>
+            <h3>Planning & Voorbereiding</h3>
+            <p>Heldere planning en vaste contactpersoon. Materialen en vakmensen staan klaar.</p>
+          </div>
+          <div class="step card" data-reveal>
+            <div class="num">3</div>
+            <h3>Uitvoering</h3>
+            <p>Netjes, veilig en volgens afspraak. We houden je continu op de hoogte.</p>
+          </div>
+          <div class="step card" data-reveal>
+            <div class="num">4</div>
+            <h3>Oplevering & Nazorg</h3>
+            <p>We leveren strak op en blijven bereikbaar voor vragen of onderhoud.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="sectionTitle">
+          <div>
+            <div class="kicker">Offerte of vraag?</div>
+            <h2 class="title">Neem contact op</h2>
+          </div>
+        </div>
+        <div class="grid" style="grid-template-columns:repeat(12,1fr);align-items:start">
+          <div class="card" style="grid-column:span 7;padding:22px" data-reveal>
+            <!-- NOTE: Replace YOUR_EMAIL_HERE below with your actual email to receive form submissions via formsubmit.co -->
+            <form action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST" class="">
+              <input type="hidden" name="_subject" value="Nieuwe aanvraag via BAAK BOUW website" />
+              <input type="hidden" name="_captcha" value="false" />
+              <label>
+                <div>Naam</div>
+                <input name="naam" required placeholder="Uw naam" />
+              </label>
+              <label>
+                <div>E‑mail</div>
+                <input type="email" name="email" required placeholder="naam@voorbeeld.nl" />
+              </label>
+              <label>
+                <div>Telefoon</div>
+                <input name="telefoon" placeholder="06…" />
+              </label>
+              <label>
+                <div>Bericht</div>
+                <textarea name="bericht" rows="5" placeholder="Vertel kort wat we mogen maken" required></textarea>
+              </label>
+              <button class="btn" type="submit">Versturen</button>
+            </form>
+          </div>
+          <div class="card" style="grid-column:span 5;padding:22px" data-reveal>
+            <h3>BAAK BOUW</h3>
+            <p class="kicker">Vakwerk in de Randstad</p>
+            <p><strong>Telefoon:</strong> <a id="phoneLink" href="#"></a><br>
+               <strong>E‑mail:</strong> <a id="mailLink" href="#"></a><br>
+               <strong>Regio:</strong> <span id="region"></span></p>
+            <div style="display:flex;gap:10px;margin-top:8px">
+              <a class="btn ghost" id="ctaPhone" href="#">Bel nu</a>
+              <a class="btn ghost" id="ctaMail" href="#">Mail</a>
+            </div>
+            <div style="margin-top:14px;color:#a9b9cf">KvK / BTW / Verzekerd • Op aanvraag</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container" style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+      <div>© <span id="year"></span> <strong>BAAK BOUW</strong>. Alle rechten voorbehouden.</div>
+      <div><a href="#top">Naar boven ↑</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Inject simple dynamic content + reveal animations
+    const bySel = s => document.querySelector(s);
+    const servicesEl = document.querySelector('.serviceGrid');
+    const portfolioEl = document.querySelector('.portfolio');
+
+    // Contact + footer
+    bySel('#year').textContent = new Date().getFullYear();
+    bySel('#phoneLink').textContent = SITE.phone; bySel('#phoneLink').href = `tel:${SITE.phone.replace(/\s+/g,'')}`;
+    bySel('#mailLink').textContent = SITE.email; bySel('#mailLink').href = `mailto:${SITE.email}`;
+    bySel('#region').textContent = SITE.address;
+    bySel('#ctaPhone').href = `tel:${SITE.phone.replace(/\s+/g,'')}`;
+    bySel('#ctaMail').href = `mailto:${SITE.email}?subject=Aanvraag via website`;
+
+    // Services
+    servicesEl.innerHTML = SITE.services.map(s=>`
+      <article class="service card" data-reveal>
+        <div class="icon">${s.icon}</div>
+        <h3>${s.title}</h3>
+        <p>${s.text}</p>
+      </article>`).join('');
+
+    // Portfolio
+    portfolioEl.innerHTML = SITE.portfolio.map(w=>`
+      <figure class="work card" data-reveal>
+        <img src="${w.img}" alt="${w.label}" loading="lazy" />
+        <figcaption class="label chip">${w.label}</figcaption>
+      </figure>`).join('');
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+    },{ rootMargin: '0px 0px -10% 0px'});
+    document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+
+    // Replace logo text dynamically if desired (kept simple)
+    // document.querySelector('.logo span:last-child').textContent = SITE.name;
+  </script>
+</body>
+</html>
